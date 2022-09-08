@@ -5,5 +5,7 @@
   "implementationOverride": "com.udacity.webcrawler.SequentialWebCrawler",
   "maxDepth": 2,
   "timeoutSeconds": 5,
-  "popularWordCount": 5
+  "popularWordCount": 5,
+  "profileOutputPath": "profileData_seq.txt",
+  "resultPath": "result_seq.json"
 }

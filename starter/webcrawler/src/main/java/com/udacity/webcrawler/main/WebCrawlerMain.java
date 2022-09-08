@@ -9,6 +9,7 @@ import com.udacity.webcrawler.json.CrawlResultWriter;
 import com.udacity.webcrawler.json.CrawlerConfiguration;
 import com.udacity.webcrawler.profiler.Profiler;
 import com.udacity.webcrawler.profiler.ProfilerModule;
+import org.jsoup.internal.StringUtil;
 
 import javax.inject.Inject;
 import java.io.BufferedWriter;
@@ -38,7 +39,12 @@ public final class WebCrawlerMain {
     CrawlResultWriter resultWriter = new CrawlResultWriter(result);
     // TODO: Write the crawl results to a JSON file (or System.out if the file name is empty)
     // TODO: Write the profile data to a text file (or System.out if the file name is empty)
+    if (StringUtil.isBlank(config.getResultPath())) System.out.println("Result Path empty");
+    else resultWriter.write(Path.of(config.getResultPath()));
+    if (StringUtil.isBlank(config.getProfileOutputPath())) System.out.println("Profile Output empty");
+    else profiler.writeData(Path.of(config.getProfileOutputPath()));
   }
+
 
   public static void main(String[] args) throws Exception {
     if (args.length != 1) {
