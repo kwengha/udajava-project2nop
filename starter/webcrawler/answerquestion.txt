@@ -1,0 +1,28 @@
+Questions
+
+1). Why PageParserImpl is much longer running with ParallelWebCrawler but in the same quantity of time.
+    Answer: Because the ParallelWebCrawler took 16 urls.
+            SequentialWebCrawler took 2 ones.
+
+2). Why the sequential web crawler was able to read more web pages than the parallel crawler.
+    Answer: I think it because of old computers not have CPU like multi-core CPU.
+
+    Which the parallel web crawler perform better than the sequential crawler. Why it perform better.
+    Answer: Well, In my opinion, need to configure numerous core CPU to the computer. In a same timeout, a numerous CPU could do multi tasks in parallel and make its crawler parse numerous web pages.
+
+3). What is the cross-cutting concern being addressed by the method profiler.
+    Answer: To estimate the execution time of invoking methods.
+
+    What join points are used by the method profiler.
+    Answer: method invocations.
+
+
+4). Design patterns used in project:
+    Answer:
+    +) Dependency Injection: follow the starter to apply.
+    +) Abstract Factory: PageParserFactory.
+    +) Builder: CrawlerConfiguration.
+    
+
+
+
