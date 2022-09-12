@@ -19,9 +19,9 @@ Questions
 
 4). Design patterns used in project:
     Answer:
-    +) Dependency Injection: follow the starter to apply.
+    +) Dependency Injection: I use Guice framework to implement.
     +) Abstract Factory: PageParserFactory.
-    +) Builder: CrawlerConfiguration.
+    +) Builder: CrawlerConfiguration.Builder.
 
 
     For each pattern, name one thing about the pattern that you LIKED, and one thing you DISLIKED. If you did not like anything, you can name two things you disliked.
