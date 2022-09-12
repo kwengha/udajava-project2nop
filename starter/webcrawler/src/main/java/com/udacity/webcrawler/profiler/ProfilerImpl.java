@@ -45,24 +45,19 @@ final class ProfilerImpl implements Profiler {
             .noneMatch(m -> m.isAnnotationPresent(Profiled.class));
     if (doesNotHaveAnyAnnotatedMethod) throw new IllegalArgumentException();
     ProfilingMethodInterceptor handler = new ProfilingMethodInterceptor(clock, state, delegate);
-    T t = (T) Proxy.newProxyInstance(klass.getClassLoader(),
+    return (T) Proxy.newProxyInstance(klass.getClassLoader(),
             new Class<?>[]{klass},
             handler);
-    return t;
   }
 
   @Override
   public void writeData(Path path) throws IOException {
     // TODO: Write the ProfilingState data to the given file path. If a file already exists at that
     //       path, the new data should be appended to the existing file.
-    StandardOpenOption mode;
-    if (Files.exists(path)) mode = StandardOpenOption.APPEND;
-    else mode = StandardOpenOption.CREATE;
-    BufferedWriter writer = Files.newBufferedWriter(path, mode);
-    try {
+    try(BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.CREATE, StandardOpenOption.APPEND);) {
       writeData(writer);
-    } finally {
-      writer.close();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
 

@@ -33,19 +33,15 @@ public final class ConfigurationLoader {
    */
   public CrawlerConfiguration load() {
     // TODO: Fill in this method.
-    try {
-      BufferedReader reader = Files.newBufferedReader(path);
-      try {
-        return read(reader);
-      } finally {
-        reader.close();
-      }
+    try (var reader = Files.newBufferedReader(path)) {
+      return read(reader);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
 
 //    return new CrawlerConfiguration.Builder().build();
-  }
+
 
   /**
    * Loads crawler configuration from the given reader.
@@ -62,15 +58,13 @@ public final class ConfigurationLoader {
       return new ObjectMapper()
               .disable(JsonParser.Feature.AUTO_CLOSE_SOURCE)
               .readValue(reader, CrawlerConfiguration.class);
-    } catch (StreamReadException e) {
-      throw new RuntimeException(e);
-    } catch (DatabindException e) {
-      throw new RuntimeException(e);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
+}
+
 
 //    return new CrawlerConfiguration.Builder().build();
-  }
+
 

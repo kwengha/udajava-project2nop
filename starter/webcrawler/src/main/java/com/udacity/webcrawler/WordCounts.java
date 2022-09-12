@@ -27,19 +27,13 @@ final class WordCounts {
 
     // TODO: Reimplement this method using only the Stream API and lambdas and/or method references.
 
-    List<Map.Entry<String, Integer>> toSort = new ArrayList<>();
-    for (Map.Entry<String, Integer> stringIntegerEntry : wordCounts.entrySet()) {
-      toSort.add(stringIntegerEntry);
-    }
-    toSort.sort(new WordCountComparator());
-    LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
-    long limit = popularWordCount;
-    for (Map.Entry<String, Integer> stringIntegerEntry : toSort) {
-      if (limit-- == 0) break;
-      map.put(stringIntegerEntry.getKey(), stringIntegerEntry.getValue());
-    }
-    return map;
+    return wordCounts.entrySet()
+            .stream()
+            .sorted(new WordCountComparator())
+            .limit(popularWordCount)
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x, y) -> y, LinkedHashMap::new));
   }
+
 
   /**
    * A {@link Comparator} that sorts word count pairs correctly:

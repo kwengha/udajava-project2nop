@@ -38,14 +38,8 @@ public final class CrawlResultWriter {
 //    Objects.requireNonNull(path);
     // TODO: Fill in this method.
     Objects.requireNonNull(path);
-    try {
-      try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-        try {
-          write(writer);
-        } finally {
-          writer.close();
-        }
-      }
+    try (var writer = Files.newBufferedWriter(path)) {
+      write(writer);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -62,13 +56,9 @@ public final class CrawlResultWriter {
     // TODO: Fill in this method.
     Objects.requireNonNull(writer);
     try {
-      ObjectMapper objectMapper = new ObjectMapper();
-      objectMapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
-      objectMapper.writeValue(writer, result);
-    } catch (StreamWriteException e) {
-      throw new RuntimeException(e);
-    } catch (DatabindException e) {
-      throw new RuntimeException(e);
+      new ObjectMapper()
+              .disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET)
+              .writeValue(writer, result);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

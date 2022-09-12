@@ -22,6 +22,19 @@ Questions
     +) Dependency Injection: follow the starter to apply.
     +) Abstract Factory: PageParserFactory.
     +) Builder: CrawlerConfiguration.
+
+
+    For each pattern, name one thing about the pattern that you LIKED, and one thing you DISLIKED. If you did not like anything, you can name two things you disliked.
+     +) Dependency Injection:
+         ++) Like: I think that the code is more adjustable when switching structure code without any mismatched. I meet no challegen when running the structure code in other enviroment such as development, production, test.
+         ++) Dislike: I need more support for the DI frameworks because it is difficult to implement IoC container.
+     +) Abstract Factory:
+         ++) Like: I see that if related to a brand new parser type, the old code no need to update.
+         ++) Dislike: The code become harder to appoarch and read for others.
+     +) Builder:
+         ++) Like: I don't need to refer to the setters, create a variable, make a return.
+         ++) Dislike: Creating the builder boilerplate can take unmeasured time, I really don't like waitting for so long.
+
     
 
 
