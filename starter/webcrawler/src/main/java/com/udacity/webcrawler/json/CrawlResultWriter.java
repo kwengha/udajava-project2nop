@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 
 /**
@@ -38,10 +39,10 @@ public final class CrawlResultWriter {
 //    Objects.requireNonNull(path);
     // TODO: Fill in this method.
     Objects.requireNonNull(path);
-    try (var writer = Files.newBufferedWriter(path)) {
-      write(writer);
+    try(Writer writer = Files.newBufferedWriter(path, StandardOpenOption.CREATE)) {
+      this.write(writer);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
   }
 
